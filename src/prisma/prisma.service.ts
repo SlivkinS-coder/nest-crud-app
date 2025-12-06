@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '../generated/prisma/client';
-import { PrismaPg } from '@prisma/adapter-pg';
-import postgres from 'postgres';
+import { createPrismaPgAdapter } from './prisma.adapter';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PrismaService extends PrismaClient{
-    constructor() {
-        const adapter = new PrismaPg(process.env.DATABASE_URL);
-        super({ adapter });
-      }
+  constructor(config: ConfigService) {
+    super({
+      adapter: createPrismaPgAdapter(config),
+    });
+    }
 }
