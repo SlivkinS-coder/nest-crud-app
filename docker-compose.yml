@@ -8,6 +8,18 @@ services:
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: nest
     volumes:
+      - pgdata:/var/lib/postgresql/data-test
+      - ./init-db:/docker-entrypoint-initdb.d
+
+  test-db: 
+    image: postgres:13
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: nest
+    volumes:
       - pgdata:/var/lib/postgresql/data
       - ./init-db:/docker-entrypoint-initdb.d
 
@@ -25,4 +37,5 @@ services:
 
 volumes:
   pgdata:
+  pgdata-test:
   pgadmin-data:

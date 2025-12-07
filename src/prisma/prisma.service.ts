@@ -9,5 +9,12 @@ export class PrismaService extends PrismaClient{
     super({
       adapter: createPrismaPgAdapter(config),
     });
-    }
+  }
+  
+  cleanDB() {
+    return this.$transaction([
+      this.bookmark.deleteMany(),
+      this.user.deleteMany(),
+    ]);
+  }
 }
