@@ -234,13 +234,12 @@ describe('App e2e', () => {
       it('should delete bookmarks', () => {
         return pactum
           .spec()
-          .patch('/bookmarks/{id}')
+          .delete('/bookmarks/{id}')
           .withPathParams('id', '$S{bookmarkId}')
           .withHeaders({
             Authorization: 'Bearer $S{userAt}'
           })
           .expectStatus(204)
-          .expectBodyContains('$S{bookmarkId}')
       });
     });
 
