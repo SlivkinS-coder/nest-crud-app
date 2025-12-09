@@ -1,5 +1,4 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from "@nestjs/common";
-import { MESSAGES } from "@nestjs/core/constants";
 import {Request, Response} from 'express'
 
 @Catch()
@@ -12,7 +11,7 @@ export class AllExceptionFilter implements ExceptionFilter{
         let status =
             exception instanceof HttpException
                 ? exception.getStatus()
-                : 500;
+                : HttpStatus.INTERNAL_SERVER_ERROR;;
         
         console.error(exception);
 
